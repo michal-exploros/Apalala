@@ -236,7 +236,7 @@
 			             <manifestEntries>
 					          <Implementation-Environment>Dev</Implementation-Environment>
 					          <Implementation-Build>${buildResultKey}</Implementation-Build>
-					          <Implementation-Branch>${branchName}</Implementation-Branch>
+					          <Implementation-Branch>${branch}</Implementation-Branch>
 					          <Implementation-Git-Hash>${revision}</Implementation-Git-Hash>
 			             </manifestEntries>
 			         </archive>
