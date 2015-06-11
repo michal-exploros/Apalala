@@ -23,10 +23,10 @@
     <artifactId>Apalala</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>WildFly Quickstarts: Apalala</name>
-    <description>A starter Java EE 7 webapp project for use on JBoss WildFly / WildFly, generated from the jboss-javaee6-webapp archetype</description>
+    <name>Apalala</name>
+    <description></description>
 
-    <url>http://wildfly.org</url>
+    <url>http://exploros.com</url>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -234,10 +234,10 @@
 				          <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 				        </manifest>
 			             <manifestEntries>
-					          <Implementation-Environment>${env}</Implementation-Environment>
-					          <Implementation-Build>${bamboo.buildResultKey}</Implementation-Build>
-					          <Implementation-Branch>${bamboo.planRepository.3.branchName}</Implementation-Branch>
-					          <Implementation-Git-Hash>${bamboo.planRepository.3.revision}</Implementation-Git-Hash>
+					          <Implementation-Environment>Dev</Implementation-Environment>
+					          <Implementation-Build>${buildResultKey}</Implementation-Build>
+					          <Implementation-Branch>${branchName}</Implementation-Branch>
+					          <Implementation-Git-Hash>${revision}</Implementation-Git-Hash>
 			             </manifestEntries>
 			         </archive>
                 </configuration>
