@@ -216,7 +216,14 @@
 		         	</execution>
 			     </executions>
             </plugin>
- -->            <plugin>
+ -->
+			 <plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-bamboo-plugin</artifactId>
+				<version>5.0.18</version>
+			</plugin>
+
+             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
                 <configuration>
