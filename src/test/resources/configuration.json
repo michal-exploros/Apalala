@@ -1,0 +1,92 @@
+{
+    "tls" :
+    {
+        "key_path" : "exploros.com.key",
+        "certificate_path" : "exploros.com.crt"
+    },
+
+    "webapp" :
+    {
+        "port" : "8080"
+    },
+
+    "realtime" :
+    {
+    },
+
+    "queue" :
+    {
+        "kue" :
+        {
+            "port" : "3000"
+        }
+    },
+
+    "storage" :
+    {
+        "mysql" :
+        {
+            "host" : "localhost",
+            "database" : "exploros",
+            "username" : "exploros",
+            "password" : "exploros"
+        },
+
+        "redis" :
+        {
+            "host" : "localhost"
+        },
+
+        "ldap" :
+        {
+            "host" : "localhost",
+            "rootdn" : "cn=Manager,dc=exploros,dc=com",
+            "rootpw" : "openldap",
+            "users_path" : "ou=users,ou=app,dc=exploros,dc=com"
+        }
+    },
+
+    "logger" :
+    {
+        "level": "debug",
+        "config_file": "./log4js-config.json"
+    },
+    "mailer":
+    {
+        "sendmail_path": "/usr/sbin"
+    },
+    "s3" :
+    {
+        "key": "test",
+        "secret": "testsecret",
+        "bucket_upload" : "exploros_upload_dev",
+        "upload_dev_prefix" : "prefix"
+    },
+    "api" :
+    {
+        "protocol" : "http",
+        "host" : "localhost",
+        "port" : "8080",
+        "login" : "/session/login",
+        "logout" : "/session/logout",
+        "validation" : "/session/validate"
+    },
+    "cookies" :
+    {
+        "token_cookie_name" : "dev_exploros_token",
+        "session_details_cookie_name" : "dev_session_details",
+        "domain" : ".exploros.com",
+        "old_cookie_name" : "exploros_token"
+    },
+    "scaling":
+    {
+        "magento_product": "true",
+        "authoring_product": "true",
+        "server_name": "vmexploros.exploros.com:8080"
+    },
+    "path":
+    {
+        "upload":  "../upload",
+        "temp": "../../tmp"
+    }
+}
