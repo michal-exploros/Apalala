@@ -1,5 +1,6 @@
 package apalala.exploros.user;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
@@ -28,10 +29,12 @@ public class ConfigurationTest {
 	    public void getConfig() throws ConfigurationException, IOException {
 	    	config  = new ExplorosConfig();
 	    	config.initTest();
-	    	logger.debug(config.toString());
 	        
-	        Configuration actual = config.getConfig(null);
-	        
+	        Configuration actual = config.getConfig("storage");
 	        assertNotNull(actual);
+	        actual = actual.subset("mysql");
+	        assertNotNull(actual);
+	        String value = actual.getString("host");
+	        assertEquals( "localhost", value );
 	    }
 }

@@ -14,7 +14,7 @@ public class TestConfiguration {
     @ApplicationConfiguration(name = "storage.mysql")
     private Configuration myProperty;
 
-    public Configuration getProperties() {
+    public Configuration getConfiguration() {
         return myProperty;
     }
 }

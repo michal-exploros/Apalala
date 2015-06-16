@@ -3,24 +3,22 @@ package apalala.exploros.utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DynamicCombinedConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
 
 @Startup
 @Singleton
@@ -60,9 +58,10 @@ public class ExplorosConfig {
 		}
         if (configurationFile.endsWith(".json")) 
         {
-        	Map<String, Object> map = getMapFromJSon(configFile);
-        	config = new DynamicCombinedConfiguration();
-        	((DynamicCombinedConfiguration)config).addConfiguration(setMap(map, "apalala"));
+		    File xmlFile = new File(configFile.getParentFile(),configFile.getName()+".xml");
+        	createXMLFromJSon(configFile, xmlFile);
+			config = new XMLConfiguration(xmlFile);
+        	
         	logger.debug(config.subset("storage.mysql").toString());
         	logger.debug(config.subset("storage.mysql").getString("host"));
 		}
@@ -74,24 +73,8 @@ public class ExplorosConfig {
         }
 	}
 
-	private AbstractConfiguration setMap(Map map, String confName)
-	{
-		AbstractConfiguration aconfig = new DynamicCombinedConfiguration();
-    	Set<String> keys = map.keySet();
-    	for (String key : keys) 
-    	{
-    		Object current = map.get(key);
-    		if (current instanceof Map) {
-        		((DynamicCombinedConfiguration)aconfig).addConfiguration((AbstractConfiguration) setMap((Map) current, key),confName+"."+key,confName);
-			} else {
-				((DynamicCombinedConfiguration)aconfig).getConfiguration(confName).setProperty(key, current);
-			}
-		}
-		return aconfig;
 	
-	}
-	
-    private Map<String, Object> getMapFromJSon(File configFile) {
+    private void createXMLFromJSon(File configFile, File xmlFile) throws IOException {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> mapObject = null;
@@ -101,13 +84,11 @@ public class ExplorosConfig {
 			mapObject = mapper.readValue(configFile,
 					new TypeReference<Map<String, Object>>() {}
 			);
-
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			XmlMapper xmlMapper = new XmlMapper();
+		    xmlMapper.writeValue(xmlFile, mapObject);
+		} catch (Exception e) {
+   			throw new IOException(e);
 		}
-		return mapObject;
     }
     
     public Configuration getConfig(String name) {

@@ -34,8 +34,6 @@ public class ArqConfigurationTest {
                 .addPackages(true, apalala.exploros.utils.ExplorosConfig.class.getPackage())
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsLibraries(files);
-//                .addAsResource("creatures.xml")
-//                .addAsServiceProvider(Extension.class, CreatureExtension.class);
     }
 
     @EJB
@@ -45,12 +43,21 @@ public class ArqConfigurationTest {
     public void testFullConfiguration() {
     	Configuration theConfig = config.getConfig(null);
         assertFalse(theConfig.isEmpty());
-        assertEquals("{mysql={host=localhost, database=exploros, username=exploros, password=exploros}, redis={host=localhost}, ldap={host=localhost, rootdn=cn=Manager,dc=exploros,dc=com, rootpw=openldap, users_path=ou=users,ou=app,dc=exploros,dc=com}}",theConfig.subset("storage"));
+        assertEquals( "localhost", theConfig.getString("storage.mysql.host"));
     }
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testStorageConfiguration() {
+    	Configuration theConfig = config.getConfig("storage");
+        assertFalse(theConfig.isEmpty());
+        assertEquals( "localhost", theConfig.getString("mysql.host"));
+	}
+	@Test
+
+	public void testMysqlConfiguration() {
+    	Configuration theConfig = config.getConfig("storage.mysql");
+        assertFalse(theConfig.isEmpty());
+        assertEquals( "localhost", theConfig.getString("host"));
 	}
 
 }

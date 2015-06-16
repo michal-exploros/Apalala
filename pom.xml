@@ -119,18 +119,24 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.5.4</version>
 		</dependency>
+		 <dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.5.4</version>
+		</dependency>
+
  		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>1.10</version>
 		</dependency>
-		
- 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-configuration2</artifactId>
-			<version>2.0-alpha2</version>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 
+		
         <!-- First declare the APIs we depend on and need for compilation. All 
             of them are provided by JBoss WildFly -->
 
