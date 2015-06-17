@@ -9,8 +9,8 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import apalala.exploros.utils.ExplorosConfig;
 
@@ -18,7 +18,7 @@ import apalala.exploros.utils.ExplorosConfig;
 public class ConfigurationTest {
 
 	    ExplorosConfig config;
-	    private final Logger logger = LoggerFactory.getLogger(ExplorosConfig.class);
+//	    private final Logger logger = LoggerFactory.getLogger(ConfigurationTest.class);
 
 	    @BeforeClass
 	    public static void setUp(){

@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import apalala.exploros.utils.ExplorosConfig;
 
 @RunWith(Arquillian.class)
-public class ArqConfigurationTest {
+public class ArqConfigurationCDITest {
 
     @Deployment
     public static Archive<?> getDeployment() {
@@ -31,33 +31,18 @@ public class ArqConfigurationTest {
                 .importRuntimeDependencies().resolve().withTransitivity().asFile();
     	
         return ShrinkWrap.create(WebArchive.class, "apalala-test.war")
-                .addPackages(true, ExplorosConfig.class.getPackage())
+                .addPackages(true, GetConfiguration.class.getPackage())
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsLibraries(files);
     }
 
-    @Inject
-    ExplorosConfig config;
+    @EJB
+    GetConfiguration single;
     
-    @Test
-    public void testFullConfiguration() {
-    	Configuration theConfig = config.getConfig(null);
-        assertFalse(theConfig.isEmpty());
-        assertEquals( "localhost", theConfig.getString("storage.mysql.host"));
-    }
-	
 	@Test
-	public void testStorageConfiguration() {
-    	Configuration theConfig = config.getConfig("storage");
-        assertFalse(theConfig.isEmpty());
-        assertEquals( "localhost", theConfig.getString("mysql.host"));
-	}
-
-	@Test
-	public void testMysqlConfiguration() {
-    	Configuration theConfig = config.getConfig("storage.mysql");
+	public void testSingleConfiguration() {
+    	Configuration theConfig = single.getConfiguration();
         assertFalse(theConfig.isEmpty());
         assertEquals( "localhost", theConfig.getString("host"));
 	}
-
 }
